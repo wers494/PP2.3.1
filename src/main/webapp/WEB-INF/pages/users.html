@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div style="font-family: 'Arial Narrow'">
+
+    <table style="display: flex; flex-direction: column; align-items: center; justify-content: center">
+        <thread>
+            <tr style="display: flex; justify-content: space-around">
+                <th scope="col" style="width:150px; padding: 12px">Name</th>
+                <th scope="col" style="width:150px; padding: 12px">Surname</th>
+                <th scope="col" style="width:150px; padding: 12px">Age</th>
+                <th scope="col" style="width:150px; padding: 12px">Edit</th>
+                <th scope="col" style="width:150px; padding: 12px">Delete</th>
+            </tr>
+        </thread>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getName()}" style="width:150px; padding: 12px; text-align: center"></td>
+            <td th:text="${user.getSurname()}" style="width:150px; padding: 12px; text-align: center"></td>
+            <td th:text="${user.getAge()}" style="width:150px; padding: 12px; text-align: center"></td>
+            <td style="width:150px; padding: 12px; text-align: center">
+                <form th:method="GET" th:action="@{/edit/{id}(id = ${user.getId()})}">
+                    <input style=" background: white; border: 1px solid #e36d18; border-radius: 5px; padding: 10px 17px; cursor: pointer" type="submit" value="Edit">
+                </form>
+            </td>
+            <td style="width:150px; padding: 12px; text-align: center">
+                <form th:method="DELETE" th:action="@{/delete/{id}(id = ${user.getId()})}">
+                    <input style=" background: white; border: 1px solid #e36d18; border-radius: 5px; padding: 10px 17px; cursor: pointer" type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<hr/>
+<form style="display: flex; justify-content: center; align-items: center" th:method="GET" th:action="@{/new}">
+    <input style="color: white; background: #e36d18; border: 1px solid lightgray; border-radius: 5px; padding: 10px 17px; cursor: pointer" type="submit" value="Add">
+</form>
+</body>
+</html>
